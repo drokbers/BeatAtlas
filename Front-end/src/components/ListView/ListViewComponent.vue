@@ -1,6 +1,6 @@
 <template>
-  <div class="list-container h-[600px] w-80 overflow-y-auto">
-    <ul class="flex flex-col gap-3">
+  <div class="flex flex-shrink-0  md:h-[600px]   md:overflow-y-auto  overflow-x-auto overflow-hidden">
+    <ul class="flex md:flex-col  flex-row gap-3">
       <ListItem
         class=""
         v-for="item in dummyList"

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-row  bg-gray-800 bg-opacity-5 rounded-lg border border-gray-700 w-80 h-36 items-center justify-between shadow-md shadow-gray-800"
+    class="flex w-[350px]  right-6 flex-row  h-36 bg-gray-800 bg-opacity-5 rounded-lg border border-gray-700 items-center justify-between shadow-md shadow-gray-800"
   >
     <img class="h-36 w-36 p-1 rounded-2xl mr-2" :src="image" alt="{{ name }}" />
     <div id="info" class="flex flex-col w-full gap-1 text-white ">

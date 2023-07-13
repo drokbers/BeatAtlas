@@ -1,5 +1,5 @@
 <template>
-  <main class="flex relative gap-5 p-10">
+  <main class="flex  md:flex-row flex-col  gap-5 p-10">
 
     <MapView/>
     <ListViewComponent/>

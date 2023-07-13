@@ -1,7 +1,7 @@
 <template>
   <header class="flex bg-black items-center h-20">
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" height="50" />
-    <h1 class="text-3xl font-bold text-white">BeatAtlas</h1>
+    <img alt="Vue logo" class="logo m-4 -mb-6" src="@/assets/logo.svg" width="300" height="150" />
+
   </header>
   <RouterView />
 </template>

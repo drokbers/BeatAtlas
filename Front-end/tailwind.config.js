@@ -10,7 +10,7 @@ export default {
       screens: {
         'xs': '375px', // Mobil genişlik
         'sm': '515px', // Mobil genişlik
-        'md': '768px', // Tablet genişlik
+        'md': '900px', // Tablet genişlik
         'lg': '1024px', // Laptop genişlik
         'xl': '1440px', // Masaüstü genişlik
       },

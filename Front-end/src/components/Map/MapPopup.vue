@@ -1,13 +1,13 @@
 <template>
   <div
-    class="absolute right-1/3  marker:flex flex-row mr-4 rounded-2xl h-[600px] w-[300px] z-30 bg-gray-800 bg-opacity-50 srounded-lg border border-gray-700 items-center shadow-md shadow-gray-800"
+    class="flex flex-row absolute  md:right-96 marker:flex md:flex-col md:mr-4 rounded-2xl  w-auto  h-auto md:h-[600px] md:w-[300px] z-30 bg-gray-800 bg-opacity-50 srounded-lg border border-gray-700 items-center shadow-md shadow-gray-800"
   >
-    <div class="relative -left-2 -mb-6  -top-3 bg-white rounded-full w-1 h-1 items-center flex justify-center p-3" >
-      <button class="text-black" @click="close">X</button>
+    <div class="absolute  -right-2 md:-left-3 -mb-6  -top-3 bg-white rounded-full w-1 h-1 items-center flex justify-center p-3" >
+      <button class="text-black" @click="close" >X</button>
     </div>
 
     <div id="foto" class=" ">
-      <img class="w-[350px] h-[250px] rounded-2xl mr-2" :src="item.image" :alt="item.name" />
+      <img class="md:w-[350px] md:h-[250px]  w-[250px]  h-[200px]rounded-2xl mr-2" :src="item.image" :alt="item.name" />
     </div>
 
     <div id="info" class="flex flex-col w-full gap-3 text-white p-5">
