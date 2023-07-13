@@ -130,11 +130,8 @@ export default {
   },
 
   mounted() {
-
-   
-
     this.map = L.map("mapContainer").setView([46.05, 11.05], 4);
-    L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", ).addTo(this.map);
+    L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png").addTo(this.map);
 
     var customPane = this.map.createPane("customPane");
     customPane.style.zIndex = 399;
@@ -148,12 +145,11 @@ export default {
       this.markers.push(marker);
     });
     try {
-      let a= document.getElementsByClassName("leaflet-control-attribution");
+      let a = document.getElementsByClassName("leaflet-control-attribution");
       a[0].remove();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
   },
 
   onBeforeUnmount() {
@@ -162,6 +158,8 @@ export default {
     }
   },
 };
+
+//a
 </script>
 
 <style>

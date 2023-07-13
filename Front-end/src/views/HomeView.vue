@@ -16,4 +16,5 @@ export default {
     MapView,
   } 
 }
+
 </script>
