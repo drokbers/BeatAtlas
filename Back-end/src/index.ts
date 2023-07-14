@@ -6,7 +6,8 @@ import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import { clubsRouter } from "./items/clubs.router";
+import mongoose from "mongoose";
+import clubsRouter from '../src/club/clubs.router'
 import { errorHandler } from "./middleware/error.middleware";
 import { notFoundHandler } from "./middleware/not-found.middleware";
 
@@ -20,9 +21,20 @@ if (!process.env.PORT) {
   process.exit(1);
 }
 
-const PORT: number = parseInt(process.env.PORT as string, 10);
+const PORT: number = parseInt(process.env.PORT as string);
 
 const app = express();
+
+mongoose.connect(String(process.env.CONNECTION_STRING))
+  .then(() => {
+    console.log("Connected to MongoDB");
+    app.listen(1022, () => {
+      console.log(`Server running on port ${1022}`);
+    });
+  })
+  .catch((error: Error) => {
+    console.log("Error connecting to MongoDB", error);
+  });
 
 /**
  *  App Configuration
@@ -31,7 +43,7 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
-app.use("/api/menu/clubs", clubsRouter);
+app.use("/api", clubsRouter);
 app.use(errorHandler);
 app.use(notFoundHandler);
 
@@ -40,5 +52,5 @@ app.use(notFoundHandler);
  */
 
 app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
+  console.log(`Listening on port ${1032}`);
 });
