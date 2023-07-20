@@ -14,7 +14,7 @@ Let BeatAtlas be your companion as you embark on an epic journey through the wor
 
 ## Tech Stack
 
-**Client:** Vue.js, TailwindCSS, Leaflet.js
+**Client:** Vue.js, TypeScript TailwindCSS, Leaflet.js
 
 **Server:** Node, Express
 
