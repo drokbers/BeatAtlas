@@ -23,7 +23,9 @@ clubsRouter.get("/:id", async (req: Request, res: Response) => {
   try {
     const club = await Club.findById(req.params.id);
     if (!club) {
-      return res.status(404).json({ error: "Club not found" });
+      return res
+        .status(404)
+        .json({ error: `No club found with id: ${req.params.id}` });
     }
     res.json(club);
   } catch (error) {
@@ -77,7 +79,9 @@ clubsRouter.put("/:id", async (req: Request, res: Response) => {
       new: true,
     });
     if (!club) {
-      return res.status(404).json({ error: "Club not found" });
+      return res
+        .status(404)
+        .json({ error: `No club found with id: ${req.params.id}` });
     }
     res.json(club);
   } catch (error) {
@@ -97,7 +101,9 @@ clubsRouter.delete("/:id", async (req: Request, res: Response) => {
 
     const club = await Club.findByIdAndDelete(req.params.id);
     if (!club) {
-      return res.status(404).json({ error: "Club not found" });
+      return res
+        .status(404)
+        .json({ error: `No club found with id: ${req.params.id}` });
     }
 
     res.json({ message: "Club deleted successfully" });

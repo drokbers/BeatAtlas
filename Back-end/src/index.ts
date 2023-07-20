@@ -7,7 +7,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import mongoose from "mongoose";
-import clubsRouter from '../src/club/clubs.router'
+import clubsRouter from "../src/club/clubs.router";
 import { errorHandler } from "./middleware/error.middleware";
 import { notFoundHandler } from "./middleware/not-found.middleware";
 
@@ -25,7 +25,8 @@ const PORT: number = parseInt(process.env.PORT as string);
 
 const app = express();
 
-mongoose.connect(String(process.env.CONNECTION_STRING))
+mongoose
+  .connect(String(process.env.CONNECTION_STRING))
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(1022, () => {
