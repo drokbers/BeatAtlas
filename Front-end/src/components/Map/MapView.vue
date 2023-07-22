@@ -34,7 +34,11 @@ export default {
           },
           website: "wwww.BeatAtlas.com",
           direction: "222e 32st NYC , NY",
-          image: "https://media.timeout.com/images/105562876/image.jpg",
+          photos: [
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+          ],
           description:
             "Best underground techno club in the city, Mostly 1 hour line in the door and you should get ticket before go, There is a dress code too, make sure wear black",
         },
@@ -50,12 +54,16 @@ export default {
           },
           website: "wwww.BeatAtlas.com",
           direction: "222e 32st NYC , NY",
-          image: "https://media.timeout.com/images/105562876/image.jpg",
+          photos: [
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+          ],
           description: "Lorem ipsum dolor sit amet",
         },
         {
           id: 1,
-          name: " Klein Harbiye",
+          name: " Klein Harbiye1",
           genre: "Trance, Techno, EDM",
           workhours: { start: "9:00", end: "03:00" },
           location: {
@@ -65,7 +73,11 @@ export default {
           },
           website: "wwww.BeatAtlas.com",
           direction: "222e 32st NYC , NY",
-          image: "https://media.timeout.com/images/105562876/image.jpg",
+          photos: [
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+          ],
           description:
             "Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet",
         },
@@ -81,7 +93,11 @@ export default {
           },
           website: "wwww.BeatAtlas.com",
           direction: "222e 32st NYC , NY",
-          image: "https://media.timeout.com/images/105562876/image.jpg",
+          photos: [
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+          ],
           description:
             "Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet",
         },
@@ -97,7 +113,11 @@ export default {
           },
           website: "wwww.BeatAtlas.com",
           direction: "222e 32st NYC , NY",
-          image: "https://media.timeout.com/images/105562876/image.jpg",
+          photos: [
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+          ],
           description:
             "Lorem ipsum dolor sit ame Lorem ipsum dolor sit amet Lorem ipsum dolor sit amett",
         },
@@ -113,7 +133,11 @@ export default {
             country: "Turkey",
             latLng: "41.0052, 43.7179",
           },
-          image: "https://media.timeout.com/images/105562876/image.jpg",
+          photos: [
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+          ],
           description:
             "Lorem ipsum doloLorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ametr sit amet",
         },

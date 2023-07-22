@@ -4,10 +4,11 @@
   "description": "BeatAtlas backend",
   "main": "index.js",
   "scripts": {
-    "start": "node index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts"
+    "start": "node build/index.js",
+    "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts",
+    "build": "tsc -p ."
   },
+  
   "author": "",
   "license": "ISC",
   "dependencies": {

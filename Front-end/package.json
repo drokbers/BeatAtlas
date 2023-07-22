@@ -12,16 +12,17 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "leaflet": "^1.9.4",
-    "vue": "^3.3.4",
-    "vue-router": "^4.2.2",
     "@elfalem/leaflet-curve": "0.7.0",
     "@tweenjs/tween.js": "17.2.0",
-    "core-js": "^3.6.5"
+    "core-js": "^3.6.5",
+    "leaflet": "^1.9.4",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.2"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
     "@tsconfig/node18": "^2.0.1",
+    "@types/leaflet": "^1.9.3",
     "@types/node": "^18.16.17",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/eslint-config-prettier": "^7.1.0",
