@@ -220,7 +220,7 @@ export default {
     customPane.style.zIndex = 399;
 
     var customIcon = L.icon({
-      iconUrl: "/src/assets/icons/disco.png",
+      iconUrl: "/icons/disco.png",
       iconSize: [30, 30],
       iconAnchor: [30, 30],
     });

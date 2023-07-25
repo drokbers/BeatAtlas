@@ -6,21 +6,21 @@
       class="absolute -right-2 md:-left-5 -mb-6 -top-5 rounded-full p-3 w-14"
       @click="close"
     >
-      <img class="" src="../../assets/icons/close.png" />
+      <img class="" src="/icons/close.png" />
     </button>
 
     <button
       class="absolute z-index: 3 rotate-180 -right-7 -mb-6 top-28 p-3 button-next w-14"
       @click="nextSlide"
     >
-      <img class="" src="../../assets/icons/back.png" />
+      <img class="" src="/icons/back.png" />
     </button>
 
     <button
       class="absolute z-index: 5 -left-7 -mb-6 top-28 p-3 button-prev w-14"
       @click="prevSlide"
     >
-      <img class="" src="../../assets/icons/back.png" />
+      <img class="" src="/icons/back.png" />
     </button>
 
     <div
@@ -39,7 +39,7 @@
       <span class="text-sm"> {{ item.description }}</span>
 
       <div class="flex items-center gap-3">
-        <img class="w-5 h-5" src="../../assets/icons/genre.png" />
+        <img class="w-5 h-5" src="/icons/genre.png" />
         <span>{{ item.genre }}</span>
       </div>
 
@@ -47,7 +47,7 @@
         @click="toggleMenu"
         class="flex items-center gap-3 hover:bg-slate-500 hover:cursor-pointer"
       >
-        <img class="w-5 h-5 flex-none" src="../../assets/icons/clock.png" />
+        <img class="w-5 h-5 flex-none" src="/icons/clock.png" />
         <span v-if="!showMenu" class="grow">{{
           item.opening_hours.weekday_text[0]
         }}</span>
@@ -62,16 +62,16 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <img class="w-5 h-5" src="../../assets/icons/website.png" />
+        <img class="w-5 h-5" src="/icons/website.png" />
         <span>{{ item.website }}</span>
       </div>
 
       <div class="flex items-center gap-3">
-        <img class="w-5 h-5" src="../../assets/icons/direction.png" />
+        <img class="w-5 h-5" src="/icons/direction.png" />
         <span>{{ item.formatted_address }}</span>
       </div>
       <div class="flex items-center gap-3">
-        <img class="w-5 h-5" src="../../assets/icons/phone.png" />
+        <img class="w-5 h-5" src="/icons/phone.png" />
         <span>{{ item.international_phone_number }}</span>
       </div>
     </div>
@@ -111,8 +111,8 @@ export default defineComponent({
   data() {
     return {
       showMenu: <boolean>false,
-      iconDropdown: "/src/assets/icons/dropdown.png",
-      iconDropup: "/src/assets/icons/dropup.png",
+      iconDropdown: "/icons/dropdown.png",
+      iconDropup: "/icons/dropup.png",
     };
   },
   setup() {

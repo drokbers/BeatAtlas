@@ -13,7 +13,7 @@
       <span class="text-sm"> {{ club.genre }}</span>
 
       <div class="flex items-center gap-1">
-        <img class="w-4 h-4" src="../../assets/icons/location.png" />
+        <img class="w-4 h-4" src="/icons/location.png" />
         <span>{{ club.location.city + "/" + club.location.country }}</span>
       </div>
     </div>

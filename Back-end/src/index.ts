@@ -7,7 +7,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import mongoose from "mongoose";
-import clubsRouter from "../src/club/clubs.router";
+import clubsRouter from "./club/clubs.router";
 import { errorHandler } from "./middleware/error.middleware";
 import { notFoundHandler } from "./middleware/not-found.middleware";
 
