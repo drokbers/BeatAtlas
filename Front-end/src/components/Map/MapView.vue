@@ -32,13 +32,20 @@ export default {
           opening_hours: {
             open_now: true,
             periods: [],
-            weekday_text: ["Mon: 9:00 – 03:00", "Tue: 9:00 – 03:00", "Wed: 9:00 – 03:00", "Thu: 9:00 – 03:00", "Fri: 9:00 – 03:00", "Sat: 9:00 – 03:00"],
+            weekday_text: [
+              "Mon: 9:00 – 03:00",
+              "Tue: 9:00 – 03:00",
+              "Wed: 9:00 – 03:00",
+              "Thu: 9:00 – 03:00",
+              "Fri: 9:00 – 03:00",
+              "Sat: 9:00 – 03:00",
+            ],
           },
           description: "Lorem ipsum dolor sit amet",
           geometry: {
-            location: { lat: 49.0052, lng: 29.7179 },
-            viewport: {
-              northeast: { lat: 42.0052, lng: 40.7179 },
+            location: { lat: 40.99506, lng: 39.789701 },
+            viewport: { 
+              northeast: { lat: 40.99506, lng: 39.789701 },
               southwest: { lat: 40.0052, lng: 38.7179 },
             },
           },
@@ -59,7 +66,14 @@ export default {
           opening_hours: {
             open_now: true,
             periods: [],
-            weekday_text: ["Mon: 9:00 – 03:00", "Tue: 9:00 – 03:00", "Wed: 9:00 – 03:00", "Thu: 9:00 – 03:00", "Fri: 9:00 – 03:00", "Sat: 9:00 – 03:00"],
+            weekday_text: [
+              "Mon: 9:00 – 03:00",
+              "Tue: 9:00 – 03:00",
+              "Wed: 9:00 – 03:00",
+              "Thu: 9:00 – 03:00",
+              "Fri: 9:00 – 03:00",
+              "Sat: 9:00 – 03:00",
+            ],
           },
           description: "Lorem ipsum dolor sit amet",
           geometry: {
@@ -87,7 +101,14 @@ export default {
           opening_hours: {
             open_now: true,
             periods: [],
-            weekday_text: ["Mon: 9:00 – 03:00", "Tue: 9:00 – 03:00", "Wed: 9:00 – 03:00", "Thu: 9:00 – 03:00", "Fri: 9:00 – 03:00", "Sat: 9:00 – 03:00"],
+            weekday_text: [
+              "Mon: 9:00 – 03:00",
+              "Tue: 9:00 – 03:00",
+              "Wed: 9:00 – 03:00",
+              "Thu: 9:00 – 03:00",
+              "Fri: 9:00 – 03:00",
+              "Sat: 9:00 – 03:00",
+            ],
           },
           description: "Lorem ipsum dolor sit amet",
           geometry: {
@@ -114,7 +135,14 @@ export default {
           opening_hours: {
             open_now: true,
             periods: [],
-            weekday_text: ["Mon: 9:00 – 03:00", "Tue: 9:00 – 03:00", "Wed: 9:00 – 03:00", "Thu: 9:00 – 03:00", "Fri: 9:00 – 03:00", "Sat: 9:00 – 03:00"],
+            weekday_text: [
+              "Mon: 9:00 – 03:00",
+              "Tue: 9:00 – 03:00",
+              "Wed: 9:00 – 03:00",
+              "Thu: 9:00 – 03:00",
+              "Fri: 9:00 – 03:00",
+              "Sat: 9:00 – 03:00",
+            ],
           },
           description: "Lorem ipsum dolor sit amet",
           geometry: {
@@ -141,7 +169,14 @@ export default {
           opening_hours: {
             open_now: true,
             periods: [],
-            weekday_text: ["Mon: 9:00 – 03:00", "Tue: 9:00 – 03:00", "Wed: 9:00 – 03:00", "Thu: 9:00 – 03:00", "Fri: 9:00 – 03:00", "Sat: 9:00 – 03:00"],
+            weekday_text: [
+              "Mon: 9:00 – 03:00",
+              "Tue: 9:00 – 03:00",
+              "Wed: 9:00 – 03:00",
+              "Thu: 9:00 – 03:00",
+              "Fri: 9:00 – 03:00",
+              "Sat: 9:00 – 03:00",
+            ],
           },
           description: "Lorem ipsum dolor sit amet",
           geometry: {
@@ -184,9 +219,15 @@ export default {
     var customPane = this.map.createPane("customPane");
     customPane.style.zIndex = 399;
 
+    var customIcon = L.icon({
+      iconUrl: "/src/assets/icons/disco.png",
+      iconSize: [30, 30],
+      iconAnchor: [30, 30],
+    });
+
     this.dummyList.forEach((item) => {
       const { lat, lng } = item.geometry.location;
-      const marker = L.marker([lat, lng]).addTo(this.map);
+      const marker = L.marker([lat, lng], { icon: customIcon }).addTo(this.map);
       marker.on("click", () => {
         this.selectedMarker = item;
       });
@@ -201,11 +242,9 @@ export default {
   },
   watch: {
     locationListView(listItemLocation) {
-
-
       if (this.map && listItemLocation.lat && listItemLocation.lng) {
         this.map.flyTo([listItemLocation.lat, listItemLocation.lng], 7, {
-          duration: 3, 
+          duration: 3,
           easeLinearity: 0.5,
         });
       }
