@@ -30,7 +30,7 @@ mongoose
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(1022, () => {
-      console.log(`Server running on port ${1022}`);
+      console.log(`Server running on port ${process.env.PORT}`);
     });
   })
   .catch((error: Error) => {
@@ -53,5 +53,5 @@ app.use(notFoundHandler);
  */
 
 app.listen(PORT, () => {
-  console.log(`Listening on port ${1032}`);
+  console.log(`Listening on port ${process.env.PORT}`);
 });
