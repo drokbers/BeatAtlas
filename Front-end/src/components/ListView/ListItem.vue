@@ -1,65 +1,43 @@
 <template>
   <div
-    class="flex w-[350px]  right-6 flex-row  h-36 bg-gray-800 bg-opacity-5 rounded-lg border border-gray-700 items-center justify-between shadow-md shadow-gray-800"
+    class="flex w-[350px] right-6 flex-row h-36 hover:bg-slate-500 bg-gray-800 bg-opacity-5 rounded-lg border border-gray-700 items-center justify-between shadow-md shadow-gray-800"
+    @click="locationHandler"
   >
-    <img class="h-36 w-36 p-1 rounded-2xl mr-2" :src="image" alt="{{ name }}" />
-    <div id="info" class="flex flex-col w-full gap-1 text-white ">
-      <span class="font-bold text-xl"> {{ name }}</span>
-      <span class="text-sm"> {{ genre }}</span>
-      <span class="text-sm">{{ workhours.start + '-' + workhours.end }}</span>
+    <img
+      class="h-36 w-36 p-1 rounded-2xl mr-2"
+      :src="club.photos[0]"
+      alt="{{ club.name }}"
+    />
+    <div id="info" class="flex flex-col w-full gap-1 text-white">
+      <span class="font-bold text-xl"> {{ club.name }}</span>
+      <span class="text-sm"> {{ club.genre }}</span>
 
       <div class="flex items-center gap-1">
         <img class="w-4 h-4" src="../../assets/location.png" />
-        <span>{{ location.city +"/" + location.country }}</span>
+        <span>{{ club.location.city + "/" + club.location.country }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+
+import { type IClub } from "../../models/clubs";
+
+export default defineComponent({
   props: {
-    name: {
-      type: String,
-      required: true
-    },
-    genre: {
-      type: String,
-      required: true
-    },
-    workhours: {
-      type: Object,
+    club: {
+      type: Object as () => IClub,
       required: true,
-      validator: (value: { start: string; end: string }) => {
-        const { start, end } = value
-        const timeRegex = /^([01]\d|2[0-3]):?([0-5]\d)$/
+    },
+  },
 
-        return timeRegex.test(start) && timeRegex.test(end)
-      }
+  methods: {
+    locationHandler(): void {
+      const dataToSend = this.club.geometry.location;
+      this.$emit("locationListItem", dataToSend);
     },
-    location: {
-      city: {
-        type: String,
-        required: true
-      },
-      country: {
-        type: String,
-        required: true
-      },
-      latLng: {
-        type: String,
-        required: true
-      }
-
-    },
-    image: {
-      type: String,
-      required: true
-    },
-    description: {
-      type: String,
-      required: true
-    }
-  }
-}
+  },
+});
 </script>

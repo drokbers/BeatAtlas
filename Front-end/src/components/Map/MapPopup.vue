@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-row absolute md:right-96 marker:flex md:flex-col md:mr-4 rounded-2xl w-auto h-auto md:h-[600px] md:w-[300px] z-30 bg-gray-800 bg-opacity-50 srounded-lg border border-gray-700 items-center shadow-md shadow-gray-800"
+    class="flex flex-row absolute md:right-96 marker:flex md:flex-col md:mr-4 rounded-bl-3xl w-auto h-auto md:h-[600px] md:w-[350px] z-30 bg-gray-800 bg-opacity-50 srounded-lg border border-gray-700 shadow-md shadow-gray-800"
   >
     <button
       class="absolute -right-2 md:-left-5 -mb-6 -top-5 rounded-full p-3 w-14"
@@ -10,24 +10,27 @@
     </button>
 
     <button
-      class="absolute z-index: 1 rotate-180 -right-7 -mb-6 top-28 p-3 button-next w-14"
+      class="absolute z-index: 3 rotate-180 -right-7 -mb-6 top-28 p-3 button-next w-14"
       @click="nextSlide"
     >
       <img class="" src="../../assets/back.png" />
     </button>
 
     <button
-      class="absolute z-index: 1 -left-7 -mb-6 top-28 p-3 button-prev w-14"
+      class="absolute z-index: 5 -left-7 -mb-6 top-28 p-3 button-prev w-14"
       @click="prevSlide"
     >
       <img class="" src="../../assets/back.png" />
     </button>
 
-    <div id="foto" class="h-[250px] rounded-2xl mr-2">
+    <div id="foto" class="flex h-[250px] justify-center rounded-tl-xl pt-5 pl-2 md:pt-0 md:pl-0">
       <PhotoSlider ref="photoSliderRef" :photos="item.photos" />
     </div>
 
-    <div id="info" class="flex flex-col w-full gap-3 text-white p-5">
+    <div
+      id="info"
+      class="flex flex-col overflow-y-auto w-full h-[400px] gap-3  text-white p-5"
+    >
       <span class="font-bold text-xl"> {{ item.name }}</span>
 
       <span class="text-sm"> {{ item.description }}</span>
@@ -37,9 +40,21 @@
         <span>{{ item.genre }}</span>
       </div>
 
-      <div class="flex items-center gap-3">
-        <img class="w-5 h-5" src="../../assets/clock.png" />
-        <span>{{ item.workhours.start + "-" + item.workhours.end }}</span>
+      <div @click="toggleMenu" class="flex items-center gap-3 hover:bg-slate-500 hover:cursor-pointer">
+        <img class="w-5 h-5 flex-none" src="../../assets/clock.png" />
+        <span v-if="!showMenu" class="grow">{{
+          item.opening_hours.weekday_text[0]
+        }}</span>
+
+        <div v-if="showMenu" class="grow">
+          <div v-html="formattedWeekdayText"></div>
+        </div>
+        <img
+          
+          class="w-5 h-5 flex-none"
+          :src="!showMenu ? '/src/assets/dropdown.png' : '/src/assets/dropup.png'"
+        />
+       
       </div>
 
       <div class="flex items-center gap-3">
@@ -49,11 +64,11 @@
 
       <div class="flex items-center gap-3">
         <img class="w-5 h-5" src="../../assets/direction.png" />
-        <span>{{ item.direction }}</span>
+        <span>{{ item.formatted_address }}</span>
       </div>
       <div class="flex items-center gap-3">
         <img class="w-5 h-5" src="../../assets/phone.png" />
-        <span>{{ item.phone }}</span>
+        <span>{{ item.international_phone_number }}</span>
       </div>
     </div>
   </div>
@@ -62,8 +77,8 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import PhotoSlider from "./PhotoSlider.vue";
-import { type ComponentPublicInstance } from 'vue';
-
+import { type ComponentPublicInstance } from "vue";
+import { type IClub } from "../../models/clubs";
 
 interface PhotoSliderType extends ComponentPublicInstance {
   nextSlide: () => void;
@@ -71,21 +86,34 @@ interface PhotoSliderType extends ComponentPublicInstance {
 }
 
 export default defineComponent({
+  name: "MapPopup",
   props: {
     item: {
-      type: Object,
+      type: Object as () => IClub,
       required: true,
     },
   },
   components: {
     PhotoSlider,
   },
+  computed: {
+    formattedWeekdayText(): string {
+      const formatted = this.item.opening_hours.weekday_text.map(
+        (day) => `${day}<br>`
+      );
+      return formatted.join("");
+    },
+  },
+  data() {
+    return {
+      showMenu: <boolean>false,
+    };
+  },
   setup() {
-   
     const photoSliderRef = ref<PhotoSliderType | null>(null);
     return {
-      photoSliderRef
-    }
+      photoSliderRef,
+    };
   },
   methods: {
     close(): void {
@@ -97,10 +125,12 @@ export default defineComponent({
       }
     },
     prevSlide(): void {
-   
       if (this.photoSliderRef && this.photoSliderRef.prevSlide) {
         this.photoSliderRef.prevSlide();
       }
+    },
+    toggleMenu(): void {
+      this.showMenu = !this.showMenu;
     },
   },
 });

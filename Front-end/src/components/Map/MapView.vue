@@ -6,6 +6,7 @@
     :item="selectedMarker"
     @close-popup="closePopup"
   />
+
 </template>
 
 <script>
@@ -15,131 +16,144 @@ import MapPopup from "./MapPopup.vue";
 
 export default {
   name: "BeatAtlas",
-  components: {
-    MapPopup,
-  },
-
   data() {
     return {
       dummyList: [
         {
-          id: 1,
-          name: " Klein Harbiye",
-          genre: "Trance, Techno, EDM",
-          workhours: { start: "9:00", end: "03:00" },
-          location: {
-            city: "istanbul",
-            country: "Turkey",
-            latLng: "40.0052, 39.7179",
-          },
-          website: "wwww.BeatAtlas.com",
-          direction: "222e 32st NYC , NY",
-          photos: [
-            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
-            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
-            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
-          ],
-          description:
-            "Best underground techno club in the city, Mostly 1 hour line in the door and you should get ticket before go, There is a dress code too, make sure wear black",
-        },
-        {
-          id: 2,
-          name: "Basement",
-          genre: "Techno",
-          workhours: { start: "9:00", end: "03:00" },
-          location: {
-            city: "istanbul",
-            country: "Turkey",
-            latLng: "41.0052, 39.7179",
-          },
-          website: "wwww.BeatAtlas.com",
-          direction: "222e 32st NYC , NY",
-          photos: [
-            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
-            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
-            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
-          ],
-          description: "Lorem ipsum dolor sit amet",
-        },
-        {
-          id: 1,
-          name: " Klein Harbiye1",
-          genre: "Trance, Techno, EDM",
-          workhours: { start: "9:00", end: "03:00" },
-          location: {
-            city: "istanbul",
-            country: "Turkey",
-            latLng: "41.0052, 23.7179",
-          },
-          website: "wwww.BeatAtlas.com",
-          direction: "222e 32st NYC , NY",
-          photos: [
-            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
-            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
-            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
-          ],
-          description:
-            "Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet",
-        },
-        {
-          id: 2,
-          name: "Kastel",
-          genre: "Hiphop",
-          workhours: { start: "9:00", end: "03:00" },
-          location: {
-            city: "istanbul",
-            country: "Turkey",
-            latLng: "42.0052, 32.7179",
-          },
-          website: "wwww.BeatAtlas.com",
-          direction: "222e 32st NYC , NY",
-          photos: [
-            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
-            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
-            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
-          ],
-          description:
-            "Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet",
-        },
-        {
-          id: 1,
           name: "Klein Harbiye",
-          genre: "Trance, Techno, EDM",
-          workhours: { start: "9:00", end: "03:00" },
-          location: {
-            city: "istanbul",
-            country: "Turkey",
-            latLng: "41.0052, 53.7179",
-          },
-          website: "wwww.BeatAtlas.com",
-          direction: "222e 32st NYC , NY",
+          website: "https://example.com",
+          location: { city: "istanbul", country: "Turkey" },
           photos: [
-            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
-            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+            "https://media.timeout.com/images/105562876/image.jpg",
             "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
           ],
-          description:
-            "Lorem ipsum dolor sit ame Lorem ipsum dolor sit amet Lorem ipsum dolor sit amett",
+          rating: 4.2,
+          genre: "Trance, Techno, EDM",
+          opening_hours: {
+            open_now: true,
+            periods: [],
+            weekday_text: ["Mon: 9:00 – 03:00", "Tue: 9:00 – 03:00", "Wed: 9:00 – 03:00", "Thu: 9:00 – 03:00", "Fri: 9:00 – 03:00", "Sat: 9:00 – 03:00"],
+          },
+          description: "Lorem ipsum dolor sit amet",
+          geometry: {
+            location: { lat: 49.0052, lng: 29.7179 },
+            viewport: {
+              northeast: { lat: 42.0052, lng: 40.7179 },
+              southwest: { lat: 40.0052, lng: 38.7179 },
+            },
+          },
+          formatted_address: "Some address",
+          formatted_phone_number: "+1234567890",
+          international_phone_number: "+0987654321",
         },
         {
-          id: 2,
           name: "RX",
-          genre: "Techno",
-          workhours: { start: "9:00", end: "03:00" },
-          website: "wwww.BeatAtlas.com",
-          direction: "222e 32st NYC , NY",
-          location: {
-            city: "istanbul",
-            country: "Turkey",
-            latLng: "41.0052, 43.7179",
-          },
+          website: "https://example.com",
+          location: { city: "istanbul", country: "Turkey" },
           photos: [
-            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
-            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+            "https://media.timeout.com/images/105562876/image.jpg",
             "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
           ],
-          description:
-            "Lorem ipsum doloLorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ametr sit amet",
+          rating: 4.2,
+          genre: "Trance, Techno, EDM",
+          opening_hours: {
+            open_now: true,
+            periods: [],
+            weekday_text: ["Mon: 9:00 – 03:00", "Tue: 9:00 – 03:00", "Wed: 9:00 – 03:00", "Thu: 9:00 – 03:00", "Fri: 9:00 – 03:00", "Sat: 9:00 – 03:00"],
+          },
+          description: "Lorem ipsum dolor sit amet",
+          geometry: {
+            location: { lat: 41.0052, lng: 39.7179 },
+            viewport: {
+              northeast: { lat: 42.0052, lng: 40.7179 },
+              southwest: { lat: 40.0052, lng: 38.7179 },
+            },
+          },
+          formatted_address: "Some address",
+          formatted_phone_number: "+1234567890",
+          international_phone_number: "+0987654321",
+        },
+
+        {
+          name: "Basement",
+          website: "https://example.com",
+          location: { city: "istanbul", country: "Turkey" },
+          photos: [
+            "https://media.timeout.com/images/105562876/image.jpg",
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+          ],
+          rating: 4.2,
+          genre: "Trance, Techno, EDM",
+          opening_hours: {
+            open_now: true,
+            periods: [],
+            weekday_text: ["Mon: 9:00 – 03:00", "Tue: 9:00 – 03:00", "Wed: 9:00 – 03:00", "Thu: 9:00 – 03:00", "Fri: 9:00 – 03:00", "Sat: 9:00 – 03:00"],
+          },
+          description: "Lorem ipsum dolor sit amet",
+          geometry: {
+            location: { lat: 23.0052, lng: 39.7179 },
+            viewport: {
+              northeast: { lat: 42.0052, lng: 40.7179 },
+              southwest: { lat: 40.0052, lng: 38.7179 },
+            },
+          },
+          formatted_address: "Some address",
+          formatted_phone_number: "+1234567890",
+          international_phone_number: "+0987654321",
+        },
+        {
+          name: "Klein Lotus",
+          website: "https://example.com",
+          location: { city: "istanbul", country: "Turkey" },
+          photos: [
+            "https://media.timeout.com/images/105562876/image.jpg",
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+          ],
+          rating: 4.2,
+          genre: "Trance, Techno, EDM",
+          opening_hours: {
+            open_now: true,
+            periods: [],
+            weekday_text: ["Mon: 9:00 – 03:00", "Tue: 9:00 – 03:00", "Wed: 9:00 – 03:00", "Thu: 9:00 – 03:00", "Fri: 9:00 – 03:00", "Sat: 9:00 – 03:00"],
+          },
+          description: "Lorem ipsum dolor sit amet",
+          geometry: {
+            location: { lat: 32.0052, lng: 39.7179 },
+            viewport: {
+              northeast: { lat: 42.0052, lng: 40.7179 },
+              southwest: { lat: 40.0052, lng: 38.7179 },
+            },
+          },
+          formatted_address: "Some address",
+          formatted_phone_number: "+1234567890",
+          international_phone_number: "+0987654321",
+        },
+        {
+          name: "Maslak Harbiye",
+          website: "https://example.com",
+          location: { city: "istanbul", country: "Turkey" },
+          photos: [
+            "https://media.timeout.com/images/105562876/image.jpg",
+            "https://images.squarespace-cdn.com/content/v1/564845d3e4b03c7db181bd8a/1576350568394-KE25PJ4OGH5MZECK727Q/mimari-ic-mekan-fotograf-cekimi-10.jpg?format=1000w",
+          ],
+          rating: 4.2,
+          genre: "Trance, Techno, EDM",
+          opening_hours: {
+            open_now: true,
+            periods: [],
+            weekday_text: ["Mon: 9:00 – 03:00", "Tue: 9:00 – 03:00", "Wed: 9:00 – 03:00", "Thu: 9:00 – 03:00", "Fri: 9:00 – 03:00", "Sat: 9:00 – 03:00"],
+          },
+          description: "Lorem ipsum dolor sit amet",
+          geometry: {
+            location: { lat: 45.0052, lng: 39.7179 },
+            viewport: {
+              northeast: { lat: 42.0052, lng: 40.7179 },
+              southwest: { lat: 40.0052, lng: 38.7179 },
+            },
+          },
+          formatted_address: "Some address",
+          formatted_phone_number: "+1234567890",
+          international_phone_number: "+0987654321",
         },
       ],
       map: null,
@@ -147,6 +161,16 @@ export default {
       selectedMarker: null,
     };
   },
+  components: {
+    MapPopup,
+  },
+  props: {
+    locationListView: {
+      type: Object,
+      required: true,
+    },
+  },
+
   methods: {
     closePopup() {
       this.selectedMarker = null;
@@ -161,7 +185,7 @@ export default {
     customPane.style.zIndex = 399;
 
     this.dummyList.forEach((item) => {
-      const [lat, lng] = item.location.latLng.split(", ");
+      const { lat, lng } = item.geometry.location;
       const marker = L.marker([lat, lng]).addTo(this.map);
       marker.on("click", () => {
         this.selectedMarker = item;
@@ -175,6 +199,18 @@ export default {
       console.log(error);
     }
   },
+  watch: {
+    locationListView(listItemLocation) {
+
+
+      if (this.map && listItemLocation.lat && listItemLocation.lng) {
+        this.map.flyTo([listItemLocation.lat, listItemLocation.lng], 7, {
+          duration: 3, 
+          easeLinearity: 0.5,
+        });
+      }
+    },
+  },
 
   onBeforeUnmount() {
     if (this.map) {
@@ -182,8 +218,6 @@ export default {
     }
   },
 };
-
-//a
 </script>
 
 <style>

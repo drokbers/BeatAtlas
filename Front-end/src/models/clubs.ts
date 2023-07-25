@@ -30,7 +30,7 @@ interface IOpeningHours {
   weekday_text: string[];
 }
 
-export interface  Club{
+export default interface Club{
   name: string;
   website: string;
   location: ILocation;
@@ -38,46 +38,24 @@ export interface  Club{
   rating: number;
   genre: string;
   opening_hours: IOpeningHours;
+  description: string,
   geometry: IGeometry;
   formatted_address: string;
   formatted_phone_number: string;
   international_phone_number: string;
 }
-
-interface IClub{
-  name: { type: String, required: true },
-  website: { type: String },
-  location: {
-    country: { type: String, required: true },
-    city: { type: String, required: true },
-  },
-  photos: { type: [String] },
-  rating: { type: Number },
-  genre: { type: String },
-  opening_hours: {
-    open_now: { type: Boolean },
-    periods: { type: [Object] },
-    weekday_text: { type: [String] },
-  },
-  geometry: {
-    location: {
-      lat: { type: Number },
-      lng: { type: Number },
-    },
-    viewport: {
-      northeast: {
-        lat: { type: Number },
-        lng: { type: Number },
-      },
-      southwest: {
-        lat: { type: Number },
-        lng: { type: Number },
-      },
-    },
-  },
-  formatted_address: { type: String },
-  formatted_phone_number: { type: String },
-  international_phone_number: { type: String },
-};
-
+export interface IClub {
+  name: string;
+  website: string;
+  location: ILocation;
+  photos: string[];
+  rating: number;
+  genre: string;
+  opening_hours: IOpeningHours;
+  description: string;
+  geometry: IGeometry;
+  formatted_address: string;
+  formatted_phone_number: string;
+  international_phone_number: string;
+}
 
