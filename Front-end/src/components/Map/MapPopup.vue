@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-row absolute md:right-96 marker:flex md:flex-col md:mr-4 rounded-bl-3xl w-auto h-auto md:h-[600px] md:w-[350px] z-30 bg-gray-800 bg-opacity-50 srounded-lg border border-gray-700 shadow-md shadow-gray-800"
+    class="flex flex-row absolute  md:right-96 marker:flex md:flex-col md:mr-4 rounded-bl-3xl w-auto h-auto md:h-[600px] md:w-[350px] z-30 bg-gray-800 bg-opacity-50 srounded-lg border border-gray-700 shadow-md shadow-gray-800"
   >
     <button
       class="absolute -right-2 md:-left-5 -mb-6 -top-5 rounded-full p-3 w-14"
@@ -10,14 +10,14 @@
     </button>
 
     <button
-      class="absolute z-index: 3 rotate-180 -right-7 -mb-6 top-28 p-3 button-next w-14"
+      class="absolute z-index: 3 rotate-180  -right-7 -mb-6 top-28 p-3 button-next w-14"
       @click="nextSlide"
     >
       <img class="" src="/icons/back.png" />
     </button>
 
     <button
-      class="absolute z-index: 5 -left-7 -mb-6 top-28 p-3 button-prev w-14"
+      class="absolute z-index: 5 -left-5 md:-left-7 -mb-6 top-28 p-3 button-prev w-14"
       @click="prevSlide"
     >
       <img class="" src="/icons/back.png" />
@@ -25,7 +25,7 @@
 
     <div
       id="foto"
-      class="flex h-[250px] justify-center rounded-tl-xl pt-5 pl-2 md:pt-0 md:pl-0"
+      class="flex h-[275px] justify-center rounded-tl-xl pt-5 pl-2 md:pt-0 md:pl-0"
     >
       <PhotoSlider ref="photoSliderRef" :photos="item.photos" />
     </div>
@@ -36,11 +36,11 @@
     >
       <span class="font-bold text-xl"> {{ item.name }}</span>
 
-      <span class="text-sm"> {{ item.description }}</span>
+      <span class="text-sm"> {{ nullChecker(item.description) }}</span>
 
       <div class="flex items-center gap-3">
         <img class="w-5 h-5" src="/icons/genre.png" />
-        <span>{{ item.genre }}</span>
+        <span>{{ nullChecker(item.genre) }}</span>
       </div>
 
       <div
@@ -49,11 +49,11 @@
       >
         <img class="w-5 h-5 flex-none" src="/icons/clock.png" />
         <span v-if="!showMenu" class="grow">{{
-          item.opening_hours.weekday_text[0]
+          nullChecker(item.opening_hours.weekday_text[0])
         }}</span>
 
         <div v-if="showMenu" class="grow">
-          <div v-html="formattedWeekdayText"></div>
+          <div v-html="nullChecker(formattedWeekdayText)"></div>
         </div>
         <img
           class="w-5 h-5 flex-none"
@@ -63,16 +63,16 @@
 
       <div class="flex items-center gap-3">
         <img class="w-5 h-5" src="/icons/website.png" />
-        <span>{{ item.website }}</span>
+        <span>{{ nullChecker(item.website) }}</span>
       </div>
 
       <div class="flex items-center gap-3">
         <img class="w-5 h-5" src="/icons/direction.png" />
-        <span>{{ item.formatted_address }}</span>
+        <span>{{ nullChecker(item.formatted_address) }}</span>
       </div>
       <div class="flex items-center gap-3">
         <img class="w-5 h-5" src="/icons/phone.png" />
-        <span>{{ item.international_phone_number }}</span>
+        <span>{{ nullChecker(item.international_phone_number) }}</span>
       </div>
     </div>
   </div>
@@ -137,6 +137,13 @@ export default defineComponent({
     },
     toggleMenu(): void {
       this.showMenu = !this.showMenu;
+    },
+    nullChecker(apiData: any) {
+      if (apiData == null) {
+        return "N/A";
+      } else {
+        return `${apiData}`;
+      }
     },
   },
 });

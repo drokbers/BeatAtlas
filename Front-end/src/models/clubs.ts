@@ -36,7 +36,7 @@ export default interface Club{
   location: ILocation;
   photos: string[];
   rating: number;
-  genre: string;
+  genre:string[];
   opening_hours: IOpeningHours;
   description: string,
   geometry: IGeometry;
