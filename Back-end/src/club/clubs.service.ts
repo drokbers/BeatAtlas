@@ -1,6 +1,7 @@
 import { ClubDocument } from "../models/clubs";
 import ClubModel from "../models/clubs";
 
+
 export const findAll = async (): Promise<ClubDocument[]> => {
   return await ClubModel.find();
 };

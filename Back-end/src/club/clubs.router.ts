@@ -5,11 +5,13 @@
 import mongoose from "mongoose";
 import { NextFunction } from "express-serve-static-core";
 import * as dotenv from "dotenv";
-
 import { Router, Request, Response } from "express";
-import Club from "../models/clubs";
 
+import Club from "../models/clubs";
 import * as clubService from "./clubs.service";
+import userService from "./users.service";
+import authenticateToken from "../middleware/authenticateToken"
+
 /**
  * Router Definition
  */
@@ -18,8 +20,24 @@ const clubsRouter: Router = Router();
 const axios = require("axios");
 dotenv.config();
 
+
+
+
+
+clubsRouter.post("/login", async (req: Request, res: Response) => {
+  const { username, password } = req.body;
+
+  try {
+    const user = await userService.login(username, password);
+    res.json({ message: "Login successful", user });
+  } catch (error) {
+    res.status(401).json({ error: (error as Error).message });
+  }
+  
+});
+
 // GET clubs by ID
-clubsRouter.get("/:id", async (req: Request, res: Response) => {
+clubsRouter.get("/:id",  async (req: Request, res: Response) => {
   try {
     const club = await Club.findById(req.params.id);
     if (!club) {
@@ -73,7 +91,7 @@ clubsRouter.get("/", async (req: Request, res: Response) => {
 });
 
 // Update a club
-clubsRouter.put("/:id", async (req: Request, res: Response) => {
+clubsRouter.put("/:id", authenticateToken, async (req: Request, res: Response) => {
   try {
     const club = await Club.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -90,7 +108,7 @@ clubsRouter.put("/:id", async (req: Request, res: Response) => {
 });
 
 // Delete a club
-clubsRouter.delete("/:id", async (req: Request, res: Response) => {
+clubsRouter.delete("/:id", authenticateToken, async (req: Request, res: Response) => {
   try {
     const isValidObjectId: boolean = mongoose.Types.ObjectId.isValid(
       req.params.id
@@ -113,7 +131,7 @@ clubsRouter.delete("/:id", async (req: Request, res: Response) => {
 });
 
 clubsRouter.post(
-  "/",
+  "/", authenticateToken,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const placeName = req.body.name;

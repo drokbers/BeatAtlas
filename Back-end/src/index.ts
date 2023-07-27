@@ -21,7 +21,7 @@ if (!process.env.PORT) {
   process.exit(1);
 }
 
-const PORT: number = parseInt(process.env.PORT as string);
+const PORT: number = parseInt(process.env.PORT, 10) || 5000;
 
 const app = express();
 
@@ -29,8 +29,8 @@ mongoose
   .connect(String(process.env.CONNECTION_STRING))
   .then(() => {
     console.log("Connected to MongoDB");
-    app.listen(1022, () => {
-      console.log(`Server running on port ${process.env.PORT}`);
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
     });
   })
   .catch((error: Error) => {
@@ -52,6 +52,3 @@ app.use(notFoundHandler);
  * Server Activation
  */
 
-app.listen(PORT, () => {
-  console.log(`Listening on port ${process.env.PORT}`);
-});
