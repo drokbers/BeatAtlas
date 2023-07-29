@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-black relative  shadow-2xl h-[650px] rounded-lg w-[400px]">
+  <div class="bg-black relative shadow-2xl h-[650px] rounded-lg w-[400px]">
     <button
       class="absolute -top-6 -left-5 rounded-full p-3 w-14"
       @click="close"
@@ -8,7 +8,7 @@
     </button>
     <form
       @submit.prevent="submitForm"
-      class="flex flex-col absolute  z-40 h-[500px] w-[376px] m-3 gap-5"
+      class="flex flex-col absolute z-40 h-[500px] w-[376px] m-3 gap-5"
     >
       <div>
         <h3 class="block mb-3 font-semibold mt-5 text-white">
@@ -24,7 +24,9 @@
       </div>
 
       <div id="location" class="flex flex-col gap-2 w-full">
-        <h3 class="block mb-1 font-semibold text-white">Location</h3>
+        <h3 class="block mb-1 font-semibold items-center text-white">
+          Location
+        </h3>
 
         <select
           id="countries"
@@ -41,6 +43,9 @@
           </option>
         </select>
 
+        <div class="flex justify-center w-full">
+          <loading-spinner :loading="loading" v-if="loading" />
+        </div>
         <div v-if="cities.length > 0">
           <select
             id="cities"
@@ -70,7 +75,7 @@
               type="checkbox"
               :value="genre.name"
               v-model="formData.selectedGenres"
-              class="w-4 h-4 text-blue-600 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600"
+              class="w-3 h-3 text-blue-600 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600"
             />
             <label
               :for="genre.name"
@@ -83,20 +88,19 @@
 
       <div id="reason">
         <h3 class="mb-4 font-semibold text-white">Why you like it?</h3>
-        <div class="mb-6">
-          <input
-            v-model="formData.reason"
-            type="text"
-            id="reason-why"
-            class="block w-full p-4 border rounded-lg sm:text-md bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
+        <textarea
+          id="message"
+          v-model="formData.reason"
+          rows="4"
+         :class="inputStyles"
+          placeholder="Write your thoughts here..."
+        ></textarea>
       </div>
 
       <div class="flex justify-center">
         <button
           type="submit"
-          class="py-2.5 bg-red-900 px-5 mr-2   w-1/2 text-sm font-medium focus:outline-none rounded-lg border focus:z-10 focus:ring-4 focus:ring-gray-700 text-gray-400 border-gray-600 hover:text-white hover:bg-gray-700"
+          class="py-2.5 bg-softRed px-5 mr-2 w-1/2 text-sm font-medium focus:outline-none rounded-lg border focus:z-10 focus:ring-4 focus:ring-gray-700 text-white border-gray-600 hover:text-white hover:bg-gray-700"
         >
           Submit
         </button>
@@ -107,6 +111,7 @@
 
 <script>
 import axios from "axios";
+import LoadingSpinner from "./LoadingSpinner.vue";
 
 export default {
   data() {
@@ -119,8 +124,8 @@ export default {
         reason: "",
         selectedCountry: null,
         selectedCity: null,
-        loading: false,
       },
+      loading: false,
 
       musicGenres: [
         { id: 1, name: "Techno" },
@@ -133,13 +138,18 @@ export default {
         { id: 8, name: "Industrial" },
         { id: 9, name: "Hard" },
         { id: 10, name: "Berlin" },
+        { id: 11, name: "House-Tech" },
+        { id: 12, name: "Other" },
       ],
     };
   },
   computed: {
     inputStyles() {
-      return "w-full border rounded-lg  focus:border-blue-500 block p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 ";
+      return "w-full border rounded-lg  resize-none  focus:border-blue-500 block p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 ";
     },
+  },
+  components: {
+    LoadingSpinner,
   },
 
   methods: {
@@ -157,7 +167,6 @@ export default {
       console.log("Selected City:", selectedCityName);
       console.log("Selected Country:", selectedCountryName);
 
-    
       this.formData.city = selectedCityName;
       this.formData.country = selectedCountryName;
 
@@ -188,6 +197,8 @@ export default {
 
     getCities() {
       if (this.formData.selectedCountry) {
+        this.cities = [];
+        this.loading = true;
         const overpassQuery = `[out:json][timeout:25];area(${this.formData.selectedCountry})->.a;node["place"="city"](area.a);out;`;
 
         axios
@@ -197,16 +208,16 @@ export default {
               id: city.id,
               name: city.tags.name,
             }));
+            this.loading = false;
           })
           .catch((error) => {
             console.error(error);
+            this.loading = false;
           });
       } else {
         this.cities = [];
       }
     },
-
-   
   },
 
   mounted() {

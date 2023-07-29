@@ -6,6 +6,7 @@ export default {
       backgroundColor: {
         'softBlack': '#151515',
         'black' : '#000000',
+        'softRed' : '#e34d43'
       },
       screens: {
         'xs': '375px', // Mobil genişlik
@@ -14,6 +15,9 @@ export default {
         'lg': '1024px', // Laptop genişlik
         'xl': '1440px', // Masaüstü genişlik
       },
+      resize: {
+        'none': 'none'
+      }
     }
   },
   plugins: []

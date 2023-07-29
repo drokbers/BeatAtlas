@@ -51,9 +51,11 @@ export default {
   },
   async created() {
     var customIcon = L.icon({
-      iconUrl: "/icons/disco.png",
-      iconSize: [30, 30],
-      iconAnchor: [30, 30],
+      iconUrl: "/icons/discoman.gif",
+ 
+      iconSize: [33, 33],
+      iconAnchor: [33, 33],
+   
     });
     await this.getClubs();
     if (this.clubs.length > 0) {

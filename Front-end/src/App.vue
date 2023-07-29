@@ -5,12 +5,12 @@
         ><img
           alt="BeatAtlas logo"
           class="logo m-4 -mb-6"
-          src="@/assets/logo.svg"
+          src="@/assets/Blogo.png"
           width="300"
           height="150"
       /></router-link>
 
-      <button @click="openPopup" class="py-2.5 bg-red-900 w-36 mr-10 mb-2 text-md font-medium rounded-lg border  focus:z-10 focus:ring-4 focus:ring-gray-700   border-gray-600 text-white hover:bg-gray-700">
+      <button @click="openPopup" class="py-2.5 bg-softRed w-36 mr-10 mb-2 text-md font-medium rounded-lg border  focus:z-10 focus:ring-4 focus:ring-gray-700   border-gray-600 text-white hover:bg-gray-700">
         
         Suggest a Club?
       </button>
