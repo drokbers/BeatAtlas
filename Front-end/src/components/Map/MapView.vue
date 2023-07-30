@@ -66,6 +66,7 @@ export default {
         );
         marker.on("click", () => {
           this.selectedMarker = item;
+          console.log(item)
         });
         this.markers.push(marker);
       });
@@ -90,12 +91,17 @@ export default {
   },
   watch: {
     locationListView(listItemLocation) {
-      if (this.map && listItemLocation.lat && listItemLocation.lng) {
-        this.map.flyTo([listItemLocation.lat, listItemLocation.lng], 7, {
+      var location = listItemLocation.geometry.location;
+      if (this.map && location.lat && location.lng) {
+        this.map.flyTo([location.lat, location.lng], 7, {
           duration: 3,
           easeLinearity: 0.5,
         });
+        setTimeout(() => {
+        this.selectedMarker = listItemLocation;
+      }, 2500);
       }
+    
     },
   },
 

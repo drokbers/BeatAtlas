@@ -44,8 +44,9 @@ export default defineComponent({
 
   methods: {
     locationHandler(): void {
-      const dataToSend = this.club.geometry.location;
+      const dataToSend = this.club;
       this.$emit("locationListItem", dataToSend);
+      console.log(this.club)
     },
     capitalizeFirstLetter(value: string | string[]) {
       if (!value) return "";
