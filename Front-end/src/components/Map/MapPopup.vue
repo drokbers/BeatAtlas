@@ -72,14 +72,17 @@
     <span v-else>{{ nullChecker(item.website) }}</span>
       </div>
 
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-3 hover:bg-slate-500 hover:cursor-pointer">
         <img class="w-5 h-5" src="/icons/direction.png" />
-        <a :href="generateGoogleMapsLink(item.geometry.location)" target="_blank"> Google Maps
+        <a :href="generateGoogleMapsLink(item.geometry.location)" target="_blank">Google Maps
         </a>
       </div>
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-3 ">
         <img class="w-5 h-5" src="/icons/phone.png" />
-        <span>{{ nullChecker(item.international_phone_number) }}</span>
+        <a :href="'tel:' + item.international_phone_number">
+   
+    <span>{{ nullChecker(item.international_phone_number) }}</span>
+  </a>
       </div>
     </div>
   </div>
@@ -152,7 +155,7 @@ export default defineComponent({
         return `${apiData}`;
       }
     },
-    generateGoogleMapsLink(location: object) {
+    generateGoogleMapsLink(location: { lat: number; lng: number } ) {
       
       
       return `https://www.google.com/maps?q=${location.lat},${location.lng}`;

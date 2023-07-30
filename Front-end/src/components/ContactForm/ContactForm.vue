@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-black relative shadow-2xl h-[630px] z-50 top-5 rounded-lg w-[400px]"
+    class="bg-black relative shadow-2xl h-[550px] z-50 top-5 rounded-lg w-[400px]"
   >
     <button
       class="absolute -top-6 -left-5 rounded-full p-3 w-14"
@@ -10,7 +10,7 @@
     </button>
     <form
       @submit.prevent="submitForm"
-      class="flex flex-col absolute h-[200px] w-[376px] m-3 gap-1"
+      class="flex flex-col absolute h-[530px] w-[376px] m-3 gap-1 overflow-y-auto"
     >
       <div>
         <h3 class="block mb-3 font-semibold mt-3 text-white">
@@ -99,6 +99,47 @@
         ></textarea>
       </div>
 
+      <div id="transportation" class="flex flex-col">
+        <h3 class="mb-4 mt-2 font-semibold text-white">
+          How you reach there? (Select All)
+        </h3>
+
+        <div class="flex flex-wrap gap-1 justify-between">
+          <div
+            v-for="transportation in transportationTypes"
+            :key="transportation.id"
+            class="flex w-1/4 items-center"
+          >
+            <input
+              :id="transportation.name"
+              type="checkbox"
+              :value="transportation.name"
+              v-model="formData.selectedTransportion"
+              class="w-3 h-3 text-blue-600 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600"
+            />
+            <label
+              :for="transportation.name"
+              class="ml-2 text-sm font-medium text-gray-300"
+              >{{ transportation.name }}</label
+            >
+          </div>
+        </div>
+      </div>
+
+      <div id="drink">
+        <h3 class="mb-4 font-semibold mt-2 text-white">
+          What is the approximate cost of the drinks?
+        </h3>
+        <textarea
+          id="message"
+          v-model="formData.drink"
+          rows="4"
+          required
+          :class="inputStyles"
+          placeholder="Write your thoughts here..."
+        ></textarea>
+      </div>
+
       <div class="flex justify-center">
         <button
           type="submit"
@@ -128,11 +169,12 @@ export default {
         clubName: "",
         selectedGenres: [],
         reason: "",
+        drink: "",
         selectedCountry: null,
         selectedCity: null,
+        selectedTransportion: [],
       },
       loading: false,
-
 
       musicGenres: [
         { id: 1, name: "Techno" },
@@ -147,6 +189,14 @@ export default {
         { id: 10, name: "Berlin" },
         { id: 11, name: "House-Tech" },
         { id: 12, name: "Other" },
+      ],
+      transportationTypes: [
+        { id: 1, name: "Taxi" },
+        { id: 2, name: "Bus" },
+        { id: 3, name: "Train" },
+        { id: 4, name: "Metro" },
+        { id: 5, name: "Trams" },
+        { id: 6, name: "Other" },
       ],
     };
   },
@@ -176,7 +226,6 @@ export default {
       this.formData.country = selectedCountryName;
 
       this.sendEmail();
-  
     },
 
     getCountries() {
@@ -231,15 +280,24 @@ export default {
           `Club Name: ${this.formData.clubName}\n` +
           `Location: ${this.formData.country}, ${this.formData.city}\n` +
           `Music Genres: ${this.formData.selectedGenres.join(", ")}\n` +
-          `Reason: ${this.formData.reason}\n`,
+          `Reason: ${this.formData.reason}\n` +
+          `Drink: ${this.formData.drink}\n` +
+          `Transportion: ${this.formData.selectedTransportion.join(", ")}\n` 
+          ,
+          
+
+
       };
 
       emailjs
         .send(
-          import.meta.env.VITE_APP_EMAIL_SERVICE  ?? process.env.VITE_APP_EMAIL_SERVICE,
-          import.meta.env.VITE_APP_EMAIL_TEMPLATE ?? process.env.VITE_APP_EMAIL_TEMPLATE ,
+          import.meta.env.VITE_APP_EMAIL_SERVICE ??
+            process.env.VITE_APP_EMAIL_SERVICE,
+          import.meta.env.VITE_APP_EMAIL_TEMPLATE ??
+            process.env.VITE_APP_EMAIL_TEMPLATE,
           emailData,
-          import.meta.env.VITE_APP_EMAIL_PUBLIC_KEY ?? process.env.VITE_APP_EMAIL_PUBLIC_KEY
+          import.meta.env.VITE_APP_EMAIL_PUBLIC_KEY ??
+            process.env.VITE_APP_EMAIL_PUBLIC_KEY
         )
         .then((response) => {
           console.log("SUCCESS!", response.status, response.text);
