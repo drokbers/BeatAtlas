@@ -136,7 +136,7 @@ clubsRouter.post(
     try {
       const placeName = req.body.name;
       const placeLocation =
-        req.body.location.city + "%20" + req.body.location.country;
+        req.body.location.city + "%20" + req.body.location.country + "%20club" ;
       // taking placeID
       const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry&input=${placeName}%20${placeLocation}&inputtype=textquery&key=${process.env.Google_API}`;
       const response = await axios.get(url);
@@ -171,6 +171,7 @@ clubsRouter.post(
         photos,
         rating,
         website,
+        editorial_summary
       } = data;
 
       const photoUrls: string[] = [];
@@ -192,6 +193,7 @@ clubsRouter.post(
         photos: photoUrls,
         rating,
         website,
+        editorial_summary
       };
 
       next();

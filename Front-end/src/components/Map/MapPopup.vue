@@ -38,7 +38,7 @@
 
       <span class="text-sm"> {{ nullChecker(item.description) }}</span>
 
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-3 overflow-y-auto">
         <img class="w-5 h-5" src="/icons/genre.png" />
         <span>{{ nullChecker(item.genre) }}</span>
       </div>
@@ -61,14 +61,21 @@
         />
       </div>
 
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-3 overflow-y-auto">
         <img class="w-5 h-5" src="/icons/website.png" />
-        <span>{{ nullChecker(item.website) }}</span>
+        
+        
+        <a v-if="item.website" :href="item.website" target="_blank">
+      <span>{{ nullChecker(item.website) }}</span>
+    </a>
+  
+    <span v-else>{{ nullChecker(item.website) }}</span>
       </div>
 
       <div class="flex items-center gap-3">
         <img class="w-5 h-5" src="/icons/direction.png" />
-        <span>{{ nullChecker(item.formatted_address) }}</span>
+        <a :href="generateGoogleMapsLink(item.geometry.location)" target="_blank"> Google Maps
+        </a>
       </div>
       <div class="flex items-center gap-3">
         <img class="w-5 h-5" src="/icons/phone.png" />
@@ -103,7 +110,7 @@ export default defineComponent({
   computed: {
     formattedWeekdayText(): string {
       const formatted = this.item.opening_hours.weekday_text.map(
-        (day) => `${day}<br>`
+        (day: any) => `${day}<br>`
       );
       return formatted.join("");
     },
@@ -144,6 +151,11 @@ export default defineComponent({
       } else {
         return `${apiData}`;
       }
+    },
+    generateGoogleMapsLink(location: object) {
+      
+      
+      return `https://www.google.com/maps?q=${location.lat},${location.lng}`;
     },
   },
 });
