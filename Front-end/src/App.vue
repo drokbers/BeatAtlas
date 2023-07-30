@@ -10,31 +10,28 @@
           height="150"
       /></router-link>
 
-      <button @click="openPopup" class="py-2.5 bg-softRed w-36 mr-10 mb-2 text-md font-medium rounded-lg border  focus:z-10 focus:ring-4 focus:ring-gray-700   border-gray-600 text-white hover:bg-gray-700">
-        
+      <button
+        @click="openPopup"
+        class="py-2.5 bg-softRed w-36 mt-1 mr-3 md:mr-10 mb-2 text-sm md:text-md font-medium rounded-lg border focus:z-10 focus:ring-4 focus:ring-gray-700 border-gray-600 text-white hover:bg-gray-700"
+      >
         Suggest a Club?
       </button>
-
     </header>
     <RouterView />
-        <div v-if="isPopupOpen" class="fixed top-0 left-0 z-20 w-full h-full flex items-center justify-center">
+    <div
+      v-if="isPopupOpen"
+      class="fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center"
+    >
       <ContactFormVue @close="closePopup" />
     </div>
- 
   </div>
 </template>
 
 <script setup lang="ts">
-
 import { RouterView } from "vue-router";
-
-import { ref } from 'vue';
+import { ref } from "vue";
 
 import ContactFormVue from "./components/ContactForm/ContactForm.vue";
-
-
-
-
 
 const isPopupOpen = ref(false);
 
@@ -45,5 +42,4 @@ const openPopup = () => {
 const closePopup = () => {
   isPopupOpen.value = false;
 };
-
 </script>

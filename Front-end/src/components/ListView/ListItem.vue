@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex w-[350px] right-6 flex-row h-36  hover:bg-slate-500 bg-gray-800 bg-opacity-5 rounded-lg border border-gray-700 items-center justify-between shadow-md  shadow-gray-800"
+    class="flex   w-[300px] md:w-[350px] right-6 flex-row h-36  hover:bg-slate-500 bg-gray-800 bg-opacity-5 rounded-lg border border-gray-700 items-center justify-between shadow-md  shadow-gray-800"
     @click="locationHandler"
   >
 

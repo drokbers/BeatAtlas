@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-black relative shadow-2xl h-[650px] rounded-lg w-[400px]">
+  <div
+    class="bg-black relative shadow-2xl h-[630px] z-50 top-5 rounded-lg w-[400px]"
+  >
     <button
       class="absolute -top-6 -left-5 rounded-full p-3 w-14"
       @click="close"
@@ -8,10 +10,10 @@
     </button>
     <form
       @submit.prevent="submitForm"
-      class="flex flex-col absolute z-40 h-[500px] w-[376px] m-3 gap-5"
+      class="flex flex-col absolute h-[200px] w-[376px] m-3 gap-1"
     >
       <div>
-        <h3 class="block mb-3 font-semibold mt-5 text-white">
+        <h3 class="block mb-3 font-semibold mt-3 text-white">
           Name of the Club?
         </h3>
         <input
@@ -24,15 +26,14 @@
       </div>
 
       <div id="location" class="flex flex-col gap-2 w-full">
-        <h3 class="block mb-1 font-semibold items-center text-white">
-          Location
-        </h3>
+        <h3 class="block font-semibold items-center text-white">Location</h3>
 
         <select
           id="countries"
           :class="inputStyles"
           v-model="formData.selectedCountry"
           @change="getCities"
+          required
         >
           <option
             v-for="country in countries"
@@ -59,8 +60,8 @@
         </div>
       </div>
 
-      <div class="flex flex-col">
-        <h3 class="mb-4 font-semibold text-white">
+      <div id="genre" class="flex flex-col">
+        <h3 class="mb-4 mt-1 font-semibold text-white">
           What kind of music? (Select All)
         </h3>
 
@@ -92,7 +93,8 @@
           id="message"
           v-model="formData.reason"
           rows="4"
-         :class="inputStyles"
+          required
+          :class="inputStyles"
           placeholder="Write your thoughts here..."
         ></textarea>
       </div>
@@ -100,7 +102,7 @@
       <div class="flex justify-center">
         <button
           type="submit"
-          class="py-2.5 bg-softRed px-5 mr-2 w-1/2 text-sm font-medium focus:outline-none rounded-lg border focus:z-10 focus:ring-4 focus:ring-gray-700 text-white border-gray-600 hover:text-white hover:bg-gray-700"
+          class="py-2.5 mt-2 bg-softRed px-5 mr-2 w-1/2 text-sm font-medium focus:outline-none rounded-lg border focus:z-10 focus:ring-4 focus:ring-gray-700 text-white border-gray-600 hover:text-white hover:bg-gray-700"
         >
           Submit
         </button>
@@ -112,6 +114,10 @@
 <script>
 import axios from "axios";
 import LoadingSpinner from "./LoadingSpinner.vue";
+import emailjs from "@emailjs/browser";
+import { toast } from "vue3-toastify";
+
+import "vue3-toastify/dist/index.css";
 
 export default {
   data() {
@@ -126,6 +132,7 @@ export default {
         selectedCity: null,
       },
       loading: false,
+
 
       musicGenres: [
         { id: 1, name: "Techno" },
@@ -156,6 +163,7 @@ export default {
     close() {
       this.$emit("close");
     },
+
     submitForm() {
       const selectedCityName = this.cities.find(
         (city) => city.id === this.formData.selectedCity
@@ -164,13 +172,11 @@ export default {
         (country) => country.id === this.formData.selectedCountry
       )?.name;
 
-      console.log("Selected City:", selectedCityName);
-      console.log("Selected Country:", selectedCountryName);
-
       this.formData.city = selectedCityName;
       this.formData.country = selectedCountryName;
 
-      console.log(this.formData);
+      this.sendEmail();
+  
     },
 
     getCountries() {
@@ -217,6 +223,36 @@ export default {
       } else {
         this.cities = [];
       }
+    },
+    sendEmail() {
+      const emailData = {
+        to: "aksoyserdar9@gmail.com",
+        message:
+          `Club Name: ${this.formData.clubName}\n` +
+          `Location: ${this.formData.country}, ${this.formData.city}\n` +
+          `Music Genres: ${this.formData.selectedGenres.join(", ")}\n` +
+          `Reason: ${this.formData.reason}\n`,
+      };
+
+      emailjs
+        .send(
+          import.meta.env.VITE_APP_EMAIL_SERVICE  ?? process.env.VITE_APP_EMAIL_SERVICE,
+          import.meta.env.VITE_APP_EMAIL_TEMPLATE ?? process.env.VITE_APP_EMAIL_TEMPLATE ,
+          emailData,
+          import.meta.env.VITE_APP_EMAIL_PUBLIC_KEY ?? process.env.VITE_APP_EMAIL_PUBLIC_KEY
+        )
+        .then((response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          this.sendingInformationContent = `SUCCESS! Status: ${response.status}, Text: ${response.text}`;
+          console.log(emailData.message);
+          toast.success("Club sent successfully!", { ltr: true });
+        })
+        .catch((error) => {
+          console.log("FAILED...", error);
+          this.sendingInformationContent = `FAILED... ${error}`;
+          toast.error("Error occurred while sending Club.", { rtl: true });
+          console.log(emailData.message, error);
+        });
     },
   },
 

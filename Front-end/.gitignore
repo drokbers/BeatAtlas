@@ -1,0 +1,36 @@
+# Sistem dosyaları ve klasörleri
+.DS_Store
+Thumbs.db
+
+# Proje bağımlılıkları ve build dosyaları
+node_modules/
+dist/
+build/
+out/
+npm-debug.log
+yarn-error.log
+
+# Ortam değişkenleri
+.env
+.env.local
+.env.*.local
+
+# IDE ve metin düzenleyici yapılandırmaları
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Cache ve geçici dosyalar
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.pid
+*.seed
+*.pid.lock
+*.yml
+
+# macOS için eklenen dosyalar
+*.DS_Store
