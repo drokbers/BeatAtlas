@@ -1,10 +1,8 @@
 <template>
-  <div
-    class="flex flex-shrink-0 md:h-[600px] md:overflow-y-auto overflow-x-auto overflow-hidden"
-  >
+  <div class="flex flex-shrink-0 md:h-[600px] md:overflow-y-auto overflow-x-auto overflow-hidden">
     <ul class="flex md:flex-col flex-row gap-3">
       <ListItem
-        v-for="club in clubs"
+        v-for="club in reversedClubs"
         :key="club.name"
         :club="club"
         @locationListItem="locationDataHandler"
@@ -43,6 +41,11 @@ export default {
       } catch (error) {
         console.error("Error:", error);
       }
+    },
+  },
+  computed: {
+    reversedClubs() {
+      return this.clubs.slice().reverse();
     },
   },
   async created() {
