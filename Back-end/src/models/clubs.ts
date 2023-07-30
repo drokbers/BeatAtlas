@@ -36,7 +36,7 @@ export interface ClubDocument extends Document {
   location: ILocation;
   photos: string[];
   rating: number;
-  genre: string;
+  genre: string[]
   opening_hours: IOpeningHours;
   geometry: IGeometry;
   formatted_address: string;
@@ -53,7 +53,7 @@ const ClubSchema = new Schema<ClubDocument>({
   },
   photos: { type: [String] },
   rating: { type: Number },
-  genre: { type: String },
+  genre: { type: [String] },
   opening_hours: {
     open_now: { type: Boolean },
     periods: { type: [Object] },
