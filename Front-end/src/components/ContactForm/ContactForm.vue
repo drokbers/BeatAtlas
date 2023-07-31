@@ -177,7 +177,7 @@ export default {
       loading: false,
 
       musicGenres: [
-        { id: 1, name: "Techno" },
+        { id: 1, name: "Dark" },
         { id: 2, name: "Acid" },
         { id: 3, name: "House" },
         { id: 4, name: "Deep" },
@@ -282,11 +282,7 @@ export default {
           `Music Genres: ${this.formData.selectedGenres.join(", ")}\n` +
           `Reason: ${this.formData.reason}\n` +
           `Drink: ${this.formData.drink}\n` +
-          `Transportion: ${this.formData.selectedTransportion.join(", ")}\n` 
-          ,
-          
-
-
+          `Transportion: ${this.formData.selectedTransportion.join(", ")}\n`,
       };
 
       emailjs

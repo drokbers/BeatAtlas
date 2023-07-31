@@ -1,14 +1,21 @@
 <template>
   <div
-    class="flex flex-row absolute  md:right-96 marker:flex md:flex-col md:mr-4 rounded-bl-3xl w-auto h-auto md:h-[600px] md:w-[350px] z-30 bg-gray-800 bg-opacity-50 srounded-lg border border-gray-700 shadow-md shadow-gray-800"
+    class="flex flex-row absolute  md:right-96 marker:flex md:flex-col md:mr-4 rounded-bl-3xl w-auto h-auto md:h-[600px] md:w-[350px] z-30 bg-gray-800 bg-opacity-80 srounded-lg border border-gray-700 shadow-md shadow-gray-800"
   >
+
+
+
+
+    <div
+      id="foto"
+      class="flex h-[275px] relative justify-center rounded-tl-xl pt-5 pl-2 md:pt-0 md:pl-0"
+    >
     <button
       class="absolute -right-2 md:-left-5 -mb-6 -top-5 rounded-full p-3 w-14"
       @click="close"
     >
       <img class="" src="/icons/close.png" />
     </button>
-
     <button
       class="absolute z-index: 3 rotate-180  -right-7 -mb-6 top-28 p-3 button-next w-14"
       @click="nextSlide"
@@ -22,11 +29,6 @@
     >
       <img class="" src="/icons/back.png" />
     </button>
-
-    <div
-      id="foto"
-      class="flex h-[275px] justify-center rounded-tl-xl pt-5 pl-2 md:pt-0 md:pl-0"
-    >
       <PhotoSlider ref="photoSliderRef" :photos="item.photos" />
     </div>
 
@@ -38,7 +40,7 @@
 
       <span class="text-sm"> {{ nullChecker(item.description) }}</span>
 
-      <div class="flex items-center gap-3 overflow-y-auto">
+      <div class="flex items-center gap-3">
         <img class="w-5 h-5" src="/icons/genre.png" />
         <span>{{ nullChecker(item.genre) }}</span>
       </div>
@@ -61,15 +63,9 @@
         />
       </div>
 
-      <div class="flex items-center gap-3 overflow-y-auto">
+      <div class="flex items-center gap-3">
         <img class="w-5 h-5" src="/icons/website.png" />
-        
-        
-        <a v-if="item.website" :href="item.website" target="_blank">
-      <span>{{ nullChecker(item.website) }}</span>
-    </a>
-  
-    <span v-else>{{ nullChecker(item.website) }}</span>
+        <span>{{ nullChecker(item.website) }}</span>
       </div>
 
       <div class="flex items-center gap-3 hover:bg-slate-500 hover:cursor-pointer">
@@ -113,7 +109,7 @@ export default defineComponent({
   computed: {
     formattedWeekdayText(): string {
       const formatted = this.item.opening_hours.weekday_text.map(
-        (day: any) => `${day}<br>`
+        (day) => `${day}<br>`
       );
       return formatted.join("");
     },
