@@ -125,25 +125,63 @@
           </div>
         </div>
       </div>
+      <div id="waiting">
+        <h3 class="mb-4 font-semibold mt-2 text-white">
+          Approximately, how long do you usually wait at the entrance?
+        </h3>
+        <div class="flex flex-wrap gap-1 justify-between">
+          <div
+            v-for="time in waitingTime"
+            :key="time.id"
+            class="flex w-1/5 items-center"
+          >
+            <input
+              :id="time.name"
+              type="radio"
+              required
+              :value="time.name"
+              v-model="formData.waitingTime"
+              class="w-3 h-3 text-blue-600 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600"
+            />
+            <label
+              :for="time.name"
+              class="ml-2 text-sm font-medium text-gray-300"
+              >{{ time.name }}</label
+            >
+          </div>
+        </div>
+      </div>
 
       <div id="drink">
         <h3 class="mb-4 font-semibold mt-2 text-white">
           What is the approximate cost of the drinks?
         </h3>
-        <textarea
-          id="message"
-          v-model="formData.drink"
-          rows="4"
-          required
-          :class="inputStyles"
-          placeholder="Write your thoughts here..."
-        ></textarea>
+        <div class="flex flex-wrap gap-1 justify-between ">
+          <div
+            v-for="drink in drinkPrice"
+            :key="drink.id"
+            class="flex w-1/5 items-center"
+          >
+            <input
+              :id="drink.name"
+              type="radio"
+              :value="drink.name"
+              v-model="formData.drinkPrice"
+              class="w-3 h-3 text-blue-600 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600"
+            />
+            <label
+              :for="drink.name"
+              class="ml-2 text-sm font-medium text-gray-300"
+              >{{ drink.name }}</label
+            >
+          </div>
+        </div>
       </div>
 
       <div class="flex justify-center">
         <button
           type="submit"
-          class="py-2.5 mt-2 bg-softRed px-5 mr-2 w-1/2 text-sm font-medium focus:outline-none rounded-lg border focus:z-10 focus:ring-4 focus:ring-gray-700 text-white border-gray-600 hover:text-white hover:bg-gray-700"
+          class="py-2.5 mt-3 bg-softRed px-5 mr-2 w-1/2 text-sm font-medium focus:outline-none rounded-lg border focus:z-10 focus:ring-4 focus:ring-gray-700 text-white border-gray-600 hover:text-white hover:bg-gray-700"
         >
           Submit
         </button>
@@ -169,10 +207,11 @@ export default {
         clubName: "",
         selectedGenres: [],
         reason: "",
-        drink: "",
         selectedCountry: null,
         selectedCity: null,
         selectedTransportion: [],
+        drinkPrice:null,
+        waitingTime:null,
       },
       loading: false,
 
@@ -198,6 +237,20 @@ export default {
         { id: 5, name: "Trams" },
         { id: 6, name: "Other" },
       ],
+      drinkPrice: [
+       { id: 1, name: "$" },
+        { id: 2, name: "$$" },
+        { id: 3, name: "$$$" },
+        { id: 4, name: "$$$$" },
+      ],
+      waitingTime: [
+       { id: 1, name: "Instantly" },
+        { id: 2, name: " 30 min" },
+        { id: 3, name: "1 hour" },
+        { id: 4, name: "2 hours" },
+        { id: 4, name: " 2 +" },
+      ],
+
     };
   },
   computed: {
@@ -281,8 +334,10 @@ export default {
           `Location: ${this.formData.country}, ${this.formData.city}\n` +
           `Music Genres: ${this.formData.selectedGenres.join(", ")}\n` +
           `Reason: ${this.formData.reason}\n` +
-          `Drink: ${this.formData.drink}\n` +
-          `Transportion: ${this.formData.selectedTransportion.join(", ")}\n`,
+          `Drink:  ${this.formData.drinkPrice}\n` +
+          `Transportion: ${this.formData.selectedTransportion.join(", ")}\n` +
+          `WaitingTime:  ${this.formData.waitingTime}\n`
+          
       };
 
       emailjs
