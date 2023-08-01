@@ -11,7 +11,7 @@
       class="flex h-[275px] relative justify-center rounded-tl-xl pt-5 pl-2 md:pt-0 md:pl-0"
     >
     <button
-      class="absolute -right-2 md:-left-5 -mb-6 -top-5 rounded-full p-3 w-14"
+      class="absolute -left-7 md:-left-5 -mb-6 -top-7 rounded-full p-3 w-14"
       @click="close"
     >
       <img class="" src="/icons/close.png" />
