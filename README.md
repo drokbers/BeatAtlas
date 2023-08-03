@@ -1,4 +1,6 @@
 # BeatAtlas
+
+
 <p align="center" width="100%">
     <img width="30%" src="https://i.imgur.com/ElMY8KJ.png">
 </p>
@@ -11,10 +13,15 @@ Whether you're an experienced techno lover or new to the genre, BeatAtlas is you
 
 Let BeatAtlas be your companion as you embark on an epic journey through the world of techno, uncovering hidden gems along the way
 
+## Live
+
+https://www.beatatlas.club
+
+
 
 ## Tech Stack
 
 **Client:** Vue.js, TypeScript TailwindCSS, Leaflet.js
 
-**Server:** Node, Express
+**Server:** Node.js, Express.js
 
