@@ -50,23 +50,20 @@ export default {
     },
   },
   async created() {
-    var customIcon = L.icon({
+    let clubIcon = L.icon({
       iconUrl: "/icons/discoman.gif",
- 
+
       iconSize: [33, 33],
-      iconAnchor: [33, 33],
-   
+      iconAnchor: [20, 20],
     });
     await this.getClubs();
     if (this.clubs.length > 0) {
       this.clubs.forEach((item) => {
         const { lat, lng } = item.geometry.location;
-        const marker = L.marker([lat, lng], { icon: customIcon }).addTo(
-          this.map
-        );
+        const marker = L.marker([lat, lng], { icon: clubIcon }).addTo(this.map);
         marker.on("click", () => {
           this.selectedMarker = item;
-          console.log(item)
+          console.log(item);
         });
         this.markers.push(marker);
       });
@@ -76,19 +73,66 @@ export default {
   },
 
   mounted() {
-    this.map = L.map("mapContainer").setView([46.05, 11.05],2);
+    this.map = L.map("mapContainer").setView([46.05, 11.05], 2);
     L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png").addTo(this.map);
-
-    var customPane = this.map.createPane("customPane");
-    customPane.style.zIndex = 399;
+    this.position = null;
 
     try {
-      let a = document.getElementsByClassName("leaflet-control-attribution");
-      a[0].remove();
+      const attributionControl = document.querySelector(
+        ".leaflet-control-attribution"
+      );
+      if (attributionControl) attributionControl.remove();
     } catch (error) {
       console.log(error);
     }
+
+    const locateIcon = L.icon({
+      iconUrl: "/icons/bluedot.gif",
+      iconSize: [20, 20],
+      iconAnchor: [12, 12],
+    });
+
+    const onLocationFound = (e) => {
+      this.position = e.latlng || {
+        lat: e.coords.latitude,
+        lng: e.coords.longitude,
+      };
+      L.marker(this.position, { icon: locateIcon }).addTo(this.map);
+    };
+
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) =>
+        onLocationFound(position)
+      );
+    } else {
+      console.log("Geolocation is not supported in this browser.");
+    }
+
+    const targetMeHTML =
+      '<a class="leaflet-control-target-me" href="#" title="Target me" role="button" aria-label="Target me" aria-disabled="false"><img class="w-11 h-11" src="/icons/target.svg"></a>';
+
+    const targetMe = L.control({ position: "bottomright" });
+    targetMe.onAdd = function (map) {
+      var div = L.DomUtil.create("div", "leaflet-control-target-me");
+      div.innerHTML = targetMeHTML;
+      return div;
+    };
+    targetMe.addTo(this.map);
+
+    const targetMeElement = document.querySelector(
+      ".leaflet-control-target-me"
+    );
+    targetMeElement.addEventListener("click", () => {
+      if (this.position === null) {
+        this.map.locate({ setView: false, maxZoom: 12 });
+      } else {
+        this.map.flyTo(this.position, 12, { easeLinearity: 0.5, duration: 3 });
+      }
+    });
+
+    this.map.on("locationfound", onLocationFound);
   },
+
   watch: {
     locationListView(listItemLocation) {
       var location = listItemLocation.geometry.location;
@@ -98,10 +142,9 @@ export default {
           easeLinearity: 0.5,
         });
         setTimeout(() => {
-        this.selectedMarker = listItemLocation;
-      }, 2500);
+          this.selectedMarker = listItemLocation;
+        }, 2500);
       }
-    
     },
   },
 
