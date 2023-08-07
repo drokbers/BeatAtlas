@@ -38,7 +38,7 @@ export default interface Club{
   rating: number;
   genre:string[];
   opening_hours: IOpeningHours;
-  description: string,
+  editorial_summary: string,
   geometry: IGeometry;
   formatted_address: string;
   formatted_phone_number: string;
@@ -52,7 +52,7 @@ export interface IClub {
   rating: number;
   genre: string;
   opening_hours: IOpeningHours;
-  description: string;
+  editorial_summary: string;
   geometry: IGeometry;
   formatted_address: string;
   formatted_phone_number: string;

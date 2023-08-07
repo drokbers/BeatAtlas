@@ -148,7 +148,7 @@ clubsRouter.delete("/:id", authenticateToken_1.default, (req, res) => __awaiter(
 clubsRouter.post("/", authenticateToken_1.default, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const placeName = req.body.name;
-        const placeLocation = req.body.location.city + "%20" + req.body.location.country;
+        const placeLocation = req.body.location.city + "%20" + req.body.location.country + "%20club";
         // taking placeID
         const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry&input=${placeName}%20${placeLocation}&inputtype=textquery&key=${process.env.Google_API}`;
         const response = yield axios.get(url);
@@ -162,27 +162,33 @@ clubsRouter.post("/", authenticateToken_1.default, (req, res, next) => __awaiter
         return next(error);
     }
 }), 
-//taking place details
+//place details
 (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const place_id = req.place_id;
-        const url = `https://maps.googleapis.com/maps/api/place/details/json?fields=opening_hours%2Cgeometry%2Cname%2Crating%2Cformatted_phone_number%2Cinternational_phone_number%2Cphotos%2Cwebsite%2Cformatted_address%2Ceditorial_summary&place_id=${place_id}&key=${process.env.Google_API}`;
+        const url = `https://maps.googleapis.com/maps/api/place/details/json?fields=opening_hours%2Cgeometry%2Ceditorial_summary%2Cname%2Crating%2Cformatted_phone_number%2Cinternational_phone_number%2Cphotos%2Cwebsite%2Cformatted_address%2Ceditorial_summary&place_id=${place_id}&key=${process.env.Google_API}`;
         const response = yield axios.get(url);
         const data = response.data.result;
-        console.log("2.middleware");
-        const { formatted_address, formatted_phone_number, international_phone_number, opening_hours, geometry, photos, rating, website, } = data;
+        const { formatted_address, formatted_phone_number, international_phone_number, opening_hours, geometry, photos, rating, website, editorial_summary, } = data;
         const photoUrls = [];
         const photoRefs = photos.slice(0, 5);
         for (const photoRef of photoRefs) {
             const photoUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${photoRef.photo_reference}&key=${process.env.Google_API}`;
             photoUrls.push(photoUrl);
         }
-        req.body = Object.assign(Object.assign({}, req.body), { formatted_address,
+        req.placeDetails = {
+            formatted_address,
             formatted_phone_number,
             international_phone_number,
             opening_hours,
-            geometry, photos: photoUrls, rating,
-            website });
+            geometry,
+            photos: photoUrls,
+            rating,
+            website,
+            editorial_summary: req.body.editorial_summary,
+            transportation: req.body.transportation,
+            waitingTime: req.body.waitingTime,
+        };
         next();
     }
     catch (error) {
@@ -192,8 +198,8 @@ clubsRouter.post("/", authenticateToken_1.default, (req, res, next) => __awaiter
 // Create a new club
 (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log(req.body, "club saved");
-        const club = yield clubService.create(req.body);
+        console.log(req.placeDetails, "club saved");
+        const club = yield clubService.create(Object.assign(Object.assign({}, req.body), req.placeDetails));
         res.status(201).json(club);
     }
     catch (error) {

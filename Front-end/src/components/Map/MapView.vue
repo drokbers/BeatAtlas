@@ -50,7 +50,7 @@ export default {
     },
   },
   async created() {
-    let clubIcon = L.icon({
+    const clubIcon = L.icon({
       iconUrl: "/icons/discoman.gif",
 
       iconSize: [33, 33],
@@ -112,6 +112,7 @@ export default {
       '<a class="leaflet-control-target-me" href="#" title="Target me" role="button" aria-label="Target me" aria-disabled="false"><img class="w-11 h-11" src="/icons/target.svg"></a>';
 
     const targetMe = L.control({ position: "bottomright" });
+
     targetMe.onAdd = function (map) {
       var div = L.DomUtil.create("div", "leaflet-control-target-me");
       div.innerHTML = targetMeHTML;

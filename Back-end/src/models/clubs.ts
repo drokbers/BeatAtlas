@@ -36,13 +36,15 @@ export interface ClubDocument extends Document {
   location: ILocation;
   photos: string[];
   rating: number;
-  genre: string[]
+  genre: string[];
   opening_hours: IOpeningHours;
   geometry: IGeometry;
   formatted_address: string;
   formatted_phone_number: string;
   international_phone_number: string;
-  editorial_summary: string
+  editorial_summary: string;
+  transportation: ("Metro" | "Bus" | "Trams" | "Train" | "Taxi" | "Other")[];
+  waitingTime: "Instantly" | "30min" | "1hour" | "2hours" | "2+";
 }
 
 const ClubSchema = new Schema<ClubDocument>({
@@ -80,6 +82,14 @@ const ClubSchema = new Schema<ClubDocument>({
   formatted_phone_number: { type: String },
   international_phone_number: { type: String },
   editorial_summary: { type: String },
+  transportation: {
+    type: [String],
+    enum: ["Metro", "Bus", "Trams", "Train", "Taxi", "Other"],
+  },
+  waitingTime: {
+    type: String,
+    enum: ["Instantly", "30min", "1hour", "2hours", "2+"],
+  },
 });
 
 export default model<ClubDocument>("Club", ClubSchema);

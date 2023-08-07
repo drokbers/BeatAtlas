@@ -1,34 +1,30 @@
 <template>
   <div
-    class="flex flex-row absolute  md:right-96 marker:flex md:flex-col md:mr-4 rounded-bl-3xl w-auto h-auto md:h-[600px] md:w-[350px] z-30 bg-gray-800 bg-opacity-80 srounded-lg border border-gray-700 shadow-md shadow-gray-800"
+    class="flex flex-row absolute md:right-96 marker:flex md:flex-col md:mr-4 rounded-bl-3xl w-auto h-auto md:h-[600px] md:w-[350px] z-30 bg-gray-800 bg-opacity-80 srounded-lg border border-gray-700 shadow-md shadow-gray-800"
   >
-
-
-
-
     <div
       id="foto"
       class="flex h-[275px] relative justify-center rounded-tl-xl pt-5 pl-2 md:pt-0 md:pl-0"
     >
-    <button
-      class="absolute -left-7 md:-left-5 -mb-6 -top-7 rounded-full p-3 w-14"
-      @click="close"
-    >
-      <img class="" src="/icons/close.png" />
-    </button>
-    <button
-      class="absolute z-index: 3 rotate-180  -right-7 -mb-6 top-28 p-3 button-next w-14"
-      @click="nextSlide"
-    >
-      <img class="" src="/icons/back.png" />
-    </button>
+      <button
+        class="absolute -left-7 md:-left-5 -mb-6 -top-7 rounded-full p-3 w-14"
+        @click="close"
+      >
+        <img class="" src="/icons/close.png" />
+      </button>
+      <button
+        class="absolute z-index: 3 rotate-180 -right-7 -mb-6 top-28 p-3 button-next w-14"
+        @click="nextSlide"
+      >
+        <img class="" src="/icons/back.png" />
+      </button>
 
-    <button
-      class="absolute z-index: 5 -left-5 md:-left-7 -mb-6 top-28 p-3 button-prev w-14"
-      @click="prevSlide"
-    >
-      <img class="" src="/icons/back.png" />
-    </button>
+      <button
+        class="absolute z-index: 5 -left-5 md:-left-7 -mb-6 top-28 p-3 button-prev w-14"
+        @click="prevSlide"
+      >
+        <img class="" src="/icons/back.png" />
+      </button>
       <PhotoSlider ref="photoSliderRef" :photos="item.photos" />
     </div>
 
@@ -38,7 +34,13 @@
     >
       <span class="font-bold text-xl"> {{ item.name }}</span>
 
-      <span class="text-sm"> {{ nullChecker(item.description) }}</span>
+      <span class="text-sm hover:bg-slate-500 hover:cursor-pointer" @click="toggleSummary">
+        {{
+          showFullSummary
+            ? nullChecker(item.editorial_summary)
+            : nullChecker(item.editorial_summary?.substring(0, 100) ) + "..."
+        }}
+      </span>
 
       <div class="flex items-center gap-3">
         <img class="w-5 h-5" src="/icons/genre.png" />
@@ -68,17 +70,21 @@
         <span>{{ nullChecker(item.website) }}</span>
       </div>
 
-      <div class="flex items-center gap-3 hover:bg-slate-500 hover:cursor-pointer">
+      <div
+        class="flex items-center gap-3 hover:bg-slate-500 hover:cursor-pointer"
+      >
         <img class="w-5 h-5" src="/icons/direction.png" />
-        <a :href="generateGoogleMapsLink(item.geometry.location)" target="_blank">Google Maps
+        <a
+          :href="generateGoogleMapsLink(item.geometry.location)"
+          target="_blank"
+          >Google Maps
         </a>
       </div>
-      <div class="flex items-center gap-3 ">
+      <div class="flex items-center gap-3">
         <img class="w-5 h-5" src="/icons/phone.png" />
         <a :href="'tel:' + item.international_phone_number">
-   
-    <span>{{ nullChecker(item.international_phone_number) }}</span>
-  </a>
+          <span>{{ nullChecker(item.international_phone_number) }}</span>
+        </a>
       </div>
     </div>
   </div>
@@ -117,6 +123,7 @@ export default defineComponent({
   data() {
     return {
       showMenu: <boolean>false,
+      showFullSummary: <boolean>false,
       iconDropdown: "/icons/dropdown.png",
       iconDropup: "/icons/dropup.png",
     };
@@ -144,16 +151,14 @@ export default defineComponent({
     toggleMenu(): void {
       this.showMenu = !this.showMenu;
     },
-    nullChecker(apiData: any) {
-      if (apiData == null) {
-        return "N/A";
-      } else {
-        return `${apiData}`;
-      }
+    toggleSummary(): void {
+      this.showFullSummary = !this.showFullSummary;
     },
-    generateGoogleMapsLink(location: { lat: number; lng: number } ) {
-      
-      
+    nullChecker(apiData: any) {
+      return apiData == null ? "N/A" : `${apiData}`;
+    },
+
+    generateGoogleMapsLink(location: { lat: number; lng: number }) {
       return `https://www.google.com/maps?q=${location.lat},${location.lng}`;
     },
   },

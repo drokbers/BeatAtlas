@@ -10,7 +10,7 @@ const ClubSchema = new mongoose_1.Schema({
     },
     photos: { type: [String] },
     rating: { type: Number },
-    genre: { type: String },
+    genre: { type: [String] },
     opening_hours: {
         open_now: { type: Boolean },
         periods: { type: [Object] },
@@ -35,5 +35,14 @@ const ClubSchema = new mongoose_1.Schema({
     formatted_address: { type: String },
     formatted_phone_number: { type: String },
     international_phone_number: { type: String },
+    editorial_summary: { type: String },
+    transportation: {
+        type: [String],
+        enum: ["Metro", "Bus", "Trams", "Train", "Taxi", "Other"],
+    },
+    waitingTime: {
+        type: String,
+        enum: ["Instantly", "30min", "1hour", "2hours", "2+"],
+    },
 });
 exports.default = (0, mongoose_1.model)("Club", ClubSchema);
