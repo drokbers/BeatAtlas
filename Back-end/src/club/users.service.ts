@@ -53,6 +53,8 @@ export const login = async (username: string, password: string) => {
   return { user, token };
 };
 
+
+
 async function comparePasswords(
   inputPassword: string,
   hashedPassword: string

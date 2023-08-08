@@ -13,22 +13,32 @@ declare global {
   }
 
 
-const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
-  const token = req.header("Authorization")?.replace("Bearer ", "");
-  if (!token) {
-    return res.sendStatus(401);
-  }
-
-  jwt.verify(token, String(process.env.SECRET_JWT_CODE), (err: any, user: any ) => {
-    if (err) {
-      return res.sendStatus(403);
-    }
-    if (!user) {
-        return res.sendStatus(403);
+  const authenticateToken = (requiredRoles: string[]) => {
+    return (req: Request, res: Response, next: NextFunction) => {
+      const token = req.header("Authorization")?.replace("Bearer ", "");
+      if (!token) {
+        return res.sendStatus(401);
       }
-      req.user = user; 
-      next();
-  });
-};
+  
+      jwt.verify(token, String(process.env.SECRET_JWT_CODE), (err: any, user: any) => {
+        if (err) {
+          return res.sendStatus(403);
+        }
+        if (!user) {
+          return res.sendStatus(403);
+        }
+  
+    
+        if (requiredRoles.includes(user.role)) {
+          req.user = user;
+          next();
+        } else {
+          return res.sendStatus(403); 
+        }
+      });
+    };
+  };
+  
+  
 
 export default authenticateToken;

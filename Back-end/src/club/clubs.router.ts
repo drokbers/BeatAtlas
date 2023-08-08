@@ -9,7 +9,6 @@ import { Router, Request, Response } from "express";
 
 import Club from "../models/clubs";
 import * as clubService from "./clubs.service";
-import userService from "./users.service";
 import authenticateToken from "../middleware/authenticateToken";
 
 /**
@@ -20,16 +19,6 @@ const clubsRouter: Router = Router();
 const axios = require("axios");
 dotenv.config();
 
-clubsRouter.post("/login", async (req: Request, res: Response) => {
-  const { username, password } = req.body;
-
-  try {
-    const user = await userService.login(username, password);
-    res.json({ message: "Login successful", user });
-  } catch (error) {
-    res.status(401).json({ error: (error as Error).message });
-  }
-});
 
 // GET clubs by ID
 clubsRouter.get("/:id", async (req: Request, res: Response) => {
@@ -88,7 +77,7 @@ clubsRouter.get("/", async (req: Request, res: Response) => {
 // Update a club
 clubsRouter.put(
   "/:id",
-  authenticateToken,
+  authenticateToken(["admin"]),
   async (req: Request, res: Response) => {
     try {
       const club = await Club.findByIdAndUpdate(req.params.id, req.body, {
@@ -109,7 +98,7 @@ clubsRouter.put(
 // Delete a club
 clubsRouter.delete(
   "/:id",
-  authenticateToken,
+  authenticateToken(["admin"]),
   async (req: Request, res: Response) => {
     try {
       const isValidObjectId: boolean = mongoose.Types.ObjectId.isValid(
@@ -143,7 +132,7 @@ declare global {
 
 clubsRouter.post(
   "/",
-  authenticateToken,
+  authenticateToken(["admin"]),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const placeName = req.body.name;
