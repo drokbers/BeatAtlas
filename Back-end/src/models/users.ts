@@ -16,6 +16,11 @@ const usersSchema: Schema = new Schema({
     type: Date,
     default: Date.now,
   },
+  role: {
+    type: String,
+    enum: ["admin", "user"],
+
+  }
 });
 
 
@@ -23,6 +28,7 @@ export interface UsersDocument extends Document {
   username: string;
   password: string;
   created: Date;
+  role: "admin" | "user";
   
 }
 

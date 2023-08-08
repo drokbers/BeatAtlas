@@ -8,6 +8,7 @@ import cors from "cors";
 import helmet from "helmet";
 import mongoose from "mongoose";
 import clubsRouter from "./club/clubs.router";
+import usersRouter from "./club/users.router";
 import { errorHandler } from "./middleware/error.middleware";
 import { notFoundHandler } from "./middleware/not-found.middleware";
 
@@ -45,6 +46,7 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 app.use("/api", clubsRouter);
+app.use("/api", usersRouter);
 app.use(errorHandler);
 app.use(notFoundHandler);
 

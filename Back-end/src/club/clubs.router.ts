@@ -226,6 +226,6 @@ clubsRouter.post(
   }
 );
 
-module.exports = clubsRouter;
+// module.exports = clubsRouter;
 
 export default clubsRouter;
